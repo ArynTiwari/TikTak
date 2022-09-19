@@ -24,6 +24,11 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
       setplaying(true);
     }
   }
+  useEffect(()=>{
+    if(videoRef?.current){
+      videoRef.current.muted = videoMuted;
+    }
+  },[videoMuted])
   return (
     <div className='flex flex-col bodrder-b-2 border-gray-200 pb-6'>
       <div>
@@ -59,17 +64,18 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
         onMouseLeave={() => setIsHover(false)}
         className='lg:ml-20 flex gap-4 relative'>
         <div className='rounded-3xl'>
-          <Link href='/'>
+          <Link href={`/detail/${post._id}`}>
             <video
               ref={videoRef}
               loop
-              className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[530px] w-[200px]'
+              controls
+              className='flex bg-red-500 items-center justify-between lg:w-[850px] h-[400px] md:h-[400px] lg:h-[800px] w-[350px] md:mr-10 '
               src={post.video.asset.url}
             >
             </video>
           </Link>
           {isHover && (
-            <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px]'>
+            <div className='absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-8 lg:justify-between w-[100px] md:w-[50px]'>
               {playing ? (
                 <button onClick={onVideoPress}>
                   <BsFillPauseFill className='text-black text-2xl lg:text-4xl' />

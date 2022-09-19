@@ -2,6 +2,7 @@ import axios from 'axios'
 import NoResult from '../components/NoResult'
 import VideoCard from '../components/VideoCard'
 import { Video } from '../types'
+
 interface IProps {
   videos: Video[]
 }

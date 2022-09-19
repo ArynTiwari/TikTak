@@ -16,4 +16,9 @@ export default async function handler(
     const data = await client.fetch(query);
     res.status(200).json(data);
   }
+  else if(req.method==='POST'){
+    const doccument = req.body;
+    client.create(doccument)
+      .then(()=> res.status(201).json('Video Uploaded'))
+  }
 }
